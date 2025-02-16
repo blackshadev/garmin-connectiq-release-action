@@ -24,7 +24,7 @@ This action exports your ConnectIQ app ready for uploading to the Garmin's Conne
 
 ```
 name: Release
-run-name: ${{ github.actor }} is releasing wayfinder 🚀
+run-name: ${{ github.actor }} is releasing 🚀
 on: 
   push:
     tags:
@@ -38,20 +38,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Decrypt developer key
+        # see https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions#storing-large-secrets
         run: ./.github/scripts/decrypt_secret.sh
         env:
           INPUT: ./developer_key.gpg
           OUTPUT: ./developer_key
           PASSPHRASE: ${{ secrets.DEVELOPER_KEY_PASSPHRASE }}
       - name: Create release
-        uses: actions/garmin-connectiq-release
+        uses: blackshadev/garmin-connectiq-release-action@1.0.1
         with:
           projectJungle: ./monkey.jungle
           developerKey: ./developer_key
-          outputPath: out/wayfinder.iq
+          outputPath: out/app.iq
       - name: Upload release artifacts
         uses: actions/upload-artifact@v4
         with:
           name: wayfinder-${{ github.ref_name }}
-          path: out/wayfinder.iq
+          path: out/app.iq
 ```
