@@ -45,7 +45,7 @@ jobs:
           OUTPUT: ./developer_key
           PASSPHRASE: ${{ secrets.DEVELOPER_KEY_PASSPHRASE }}
       - name: Create release
-        uses: blackshadev/garmin-connectiq-release-action@1.0.1
+        uses: blackshadev/garmin-connectiq-release-action@8.2.1
         with:
           projectJungle: ./monkey.jungle
           developerKey: ./developer_key
