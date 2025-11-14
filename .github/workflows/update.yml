@@ -45,7 +45,7 @@ jobs:
           release_name: Release ${{ github.event.inputs.version }}
           body: |
             Updated generated files to version ${{ github.event.inputs.version }}.
-          draft: true
+          draft: false
           prerelease: false
           
       
