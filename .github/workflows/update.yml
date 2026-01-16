@@ -4,11 +4,13 @@ permissions:
   contents: write
 
 on:
-    workflow_dispatch:
-        inputs:
-            version:
-                description: 'Input the version update the repo to (e.g., 1.0.0)'
-                required: true
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Input the version update the repo to (e.g., 1.0.0)"
+        required: true
+  repository_dispatch:
+    types: [update]
 
 jobs:
   update-generated-files-and-release:
@@ -39,7 +41,7 @@ jobs:
       - name: Create release
         uses: actions/create-release@latest
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.event.inputs.version }}
           release_name: Release ${{ github.event.inputs.version }}
@@ -47,7 +49,3 @@ jobs:
             Updated generated files to version ${{ github.event.inputs.version }}.
           draft: false
           prerelease: false
-          
-      
-      
-      
