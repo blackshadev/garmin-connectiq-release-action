@@ -1,4 +1,4 @@
-FROM ghcr.io/blackshadev/garmin-connectiq-tools:8.3.0-test
+FROM ghcr.io/blackshadev/garmin-connectiq-tools:9.3.0
 
 COPY ./releaser.sh /connectiq/bin
 
